@@ -1,7 +1,7 @@
 <?php
-//if(!isset($_SESSION['login'])){
-//	header('location: ./users/login');
-//}
+if(!isset($_SESSION['login'])){
+	header('location: /Users/login');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -19,13 +19,13 @@
 	<header>
 		<div class="header">
 			<div class="rightHeadMenu">
-<!--				<label>Hi,--><?//=$_SESSION['login']?><!--</label>-->
+				<label>Hi,<?=$_SESSION['login']?></label>
 				<form action="/Users/login" method="post">
 					<button type="submit">Log out</button>
 				</form>
 			</div>
 			<div class="choiceFile">
-				<form enctype="multipart/form-data" action="index" method="POST">
+				<form enctype="multipart/form-data" action="/Fileview/index" method="POST">
 					<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
 					<div class="leftline">
 						<input name="userfile" type="file" value="" />
@@ -51,21 +51,17 @@
 		<div class="clear"></div>
 	</header>
 	<main>
-		<?
-			//while ($link_files = mysqli_fetch_assoc($files))
-		?>
-		<div class="container container_main">
-			<div class="row">
-				<div class="col-6 col-md-3"><img class="formlogin table" src="/img/059.jpg" alt="foto" > </div>
-				<div class="col-6 col-md-3"><img class=" formlogin table" src="/img/059.jpg" alt="foto" > </div>
-				<div class="col-6 col-md-3"><img class=" formlogin table" src="/img/059.jpg" alt="foto" > </div>
-				<div class="col-6 col-md-3"><img class=" formlogin table" src="/img/059.jpg" alt="foto" > </div>
-				<div class="col-6 col-md-3"><img class=" formlogin table" src="/img/059.jpg" alt="foto" > </div>
-				<div class="col-6 col-md-3"><img class=" formlogin table" src="/img/059.jpg" alt="foto" > </div>
-				<div class="col-6 col-md-3"><img class=" formlogin table" src="/img/059.jpg" alt="foto" > </div>
-				<div class="col-6 col-md-3"><img class=" formlogin table" src="/img/059.jpg" alt="foto" > </div>
 
+		<div class="container container_main">
+			<?
+				foreach ($userFiles as $userFile) {
+					$truserFile = trim($userFile['Link'],'.')
+			?>
+			<div class="row">
+				<div class="col-6 col-md-3 col-sm-3"><img class="formlogin table" src="<?=$truserFile?>" alt="foto" > </div>
+				<div class="col-6 col-md-3 col-sm-3"><img class="formlogin table" src="<?=$truserFile?>" alt="foto" > </div>
 			</div>
+		<?}?>
 		</div>
 	</main>
 	<footer>

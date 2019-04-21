@@ -5,13 +5,8 @@ class Fileview extends CI_Controller
 {
 	public function index()
 	{
-//		$this->load->database();
-//		$this->load->library('session');
-//		echo'<pre>';
-//
-//		if(!$_SESSION['id']){
-//			$this->load->view('/Users/login');
-//		}
+		$this->load->database();
+		$this->load->library('session');
 		if(isset($_FILES['userfile']))
 		{
 			if(!($_FILES['userfile']['error'])){
@@ -23,10 +18,7 @@ class Fileview extends CI_Controller
 				if(!file_exists($path)){
 					mkdir($path, 0777,true);
 				}
-				$upload = move_uploaded_file($_FILES['userfile']['tmp_name'], $path.'/'.$name.'.'.$ext);
-//				echo ($upload)?'file success uploaded': 'file not uploaded';
-				$this->load->library('session');
-				$this->load->database();
+				move_uploaded_file($_FILES['userfile']['tmp_name'], $path.'/'.$name.'.'.$ext);
 				$datafiles = [
 					'Id_User' => $_SESSION['id'],
 					'Link' => $path.'/'.$name.'.'.$ext,
@@ -35,11 +27,12 @@ class Fileview extends CI_Controller
 				$this->db->insert('files', $datafiles);
 			}
 		}
-//		$this->db->select('Link')
-//				 ->where('Id_User' == $_SESSION['id'])
-//				 ->from('files');
-//		$query = $this->db->get();
-		$this->load->view('/Fileview/index');
+		unset($_POST);
+		$this->db->select('Link');
+		$this->db->where('Id_User',$_SESSION['id']);
+		$query = $this->db->get('files');
+		$data['userFiles'] = $query->result_array();
+		$this->load->view('Fileview/index', $data);
 	}
 }
 

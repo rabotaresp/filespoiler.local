@@ -1,5 +1,5 @@
 <?php
-session_start();
+$this->load->library('session');
 if($_POST){
 	if(isset($_POST['login_user']) && isset($_POST['pass'])){
 		$login = $_POST['login_user'];
@@ -12,7 +12,7 @@ if($_POST){
 			$id_u = mysqli_query($db, "select id from users where login = '" . $login . "' and password = '" . $password . "'");
 			$_SESSION['id'] = implode('',mysqli_fetch_assoc($id_u));
 			mysqli_close($db);
-			header('location: ./Fileview/index');
+			header('location: /Fileview/index');
 		}
 		else {
 			mysqli_close($db);

@@ -26,7 +26,7 @@ class Users extends CI_Controller
 //				}
 //			}
 //		}
-		$this->load->view('/users/login');
+		$this->load->view('Users/login');
 	}
 	public function registration()
 	{
