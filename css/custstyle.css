@@ -1,0 +1,35 @@
+.clear{
+	clear: both;
+}
+.allcont{
+	width: 85%;
+	height: auto;
+}
+.container_head{
+	background-color: #00CC00;
+}
+.container_main{
+	background-color: #fbe54e;
+}
+.container_footer{
+	background-color: #0000FF;
+	color: white;
+}
+.formlogin{
+	width: 189px;
+	display: inline-block;
+}
+.header{
+	background-color: #fbe54e;
+
+}
+.rightHeadMenu{
+	float: right;
+}
+.choiceFile{
+	display: inline-block;
+}
+.leftline{
+	float: left;
+	padding: 5px;
+}
