@@ -7,9 +7,14 @@ class Fileview extends CI_Controller
 	{
 		$this->load->database();
 		$this->load->library('session');
-		if(isset($_FILES['userfile']))
-		{
-			if(!($_FILES['userfile']['error'])){
+		$sesuserid = $_SESSION['id'];
+//		$this->load->model('/Basefile/Upload');
+		if (isset($_FILES['userfile'])) {
+			if (!($_FILES['userfile']['error'])) {
+//				$username = $_FILES['userfile']['name'];
+//				$usernametmp = $_FILES['userfile']['tmp_name'];
+//				$this->model->uploadfile($username, $usernametmp);
+//			}
 				$name = md5(time().rand(1,99).$_FILES['userfile']['name']);
 				$ext = explode('.', $_FILES['userfile']['name']);
 				$ext = $ext[count($ext)-1];
@@ -29,7 +34,7 @@ class Fileview extends CI_Controller
 		}
 		unset($_POST);
 		$this->db->select('Link');
-		$this->db->where('Id_User',$_SESSION['id']);
+		$this->db->where('Id_User',$sesuserid);
 		$query = $this->db->get('files');
 		$data['userFiles'] = $query->result_array();
 		$this->load->view('Fileview/index', $data);
