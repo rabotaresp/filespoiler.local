@@ -22,7 +22,7 @@ class Users extends CI_Controller
 				}
 				else {
 					mysqli_close($db);
-					header('location: registration');
+					header('location: /Users/registration');
 				}
 			}
 		}
@@ -40,7 +40,7 @@ class Users extends CI_Controller
 				$result = mysqli_query($db,'SELECT Login FROM users WHERE login = "' . $login . '"');
 				if ( mysqli_num_rows($result) > 0) {
 					$error = 'Your login is busy, change login.';
-					header('location: registration');
+					header('location: /Users/registration');
 				}
 				else {
 					$myquery = "insert into users (Name, Login, Password) value ('" . $name . "', '" . $login . "','" . $password . "')";
@@ -56,6 +56,6 @@ class Users extends CI_Controller
 				}
 			}
 		}
-		$this->load->view('/Users/registration');
+		$this->load->view('Users/registration');
 	}
 }
