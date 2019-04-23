@@ -19,10 +19,12 @@ class Users extends CI_Controller
 					$_SESSION['id'] = implode('',mysqli_fetch_assoc($id_u));
 					mysqli_close($db);
 					header('location: /Fileview/index');
+					exit();
 				}
 				else {
 					mysqli_close($db);
 					header('location: /Users/registration');
+					exit();
 				}
 			}
 		}
@@ -41,6 +43,7 @@ class Users extends CI_Controller
 				if ( mysqli_num_rows($result) > 0) {
 					$error = 'Your login is busy, change login.';
 					header('location: /Users/registration');
+					exit();
 				}
 				else {
 					$myquery = "insert into users (Name, Login, Password) value ('" . $name . "', '" . $login . "','" . $password . "')";
@@ -53,6 +56,7 @@ class Users extends CI_Controller
 					$error = 'Success login';
 					mysqli_close($db);
 					header('location: /Fileview/index');
+					exit();
 				}
 			}
 		}
